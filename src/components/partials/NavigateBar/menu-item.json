@@ -1,0 +1,20 @@
+[
+    {
+        "id": "credit-card",
+        "icon": "https://res.cloudinary.com/drcqjnla7/image/upload/v1654072741/credit-card_yhywsb.svg",
+        "title": "Deposit",
+        "to": "/credit-card"
+    },
+    {
+        "id": "send",
+        "icon": "https://res.cloudinary.com/drcqjnla7/image/upload/v1654072770/send_oj4nnr.svg",
+        "title": "Send",
+        "to": "/send"
+    },
+    {
+        "id": "repeat",
+        "icon": "https://res.cloudinary.com/drcqjnla7/image/upload/v1654072910/repeat_x8l6vh.svg",
+        "title": "Swap",
+        "to": "/repeat"
+    }
+]
