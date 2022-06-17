@@ -22,6 +22,7 @@ const StyledInput = styled(TextField)({
     height: 40,
     borderRadius: 8,
     marginTop: 0,
+    marginBottom: 176,
 });
 
 const StyledMaxBtnLabel = styled(Typography)(({ theme }) => ({

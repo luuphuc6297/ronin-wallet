@@ -17,6 +17,12 @@ const SubmitGradientBtn = styled(Button)<GradientBtnProps>(({ colors }) => ({
     ...(colors && {
         background: `linear-gradient(to right bottom, ${colors.join(',')})`,
     }),
+    '&:hover': {
+        boxShadow: 'none',
+        ...(colors && {
+            background: `linear-gradient(to bottom right, ${colors.join(',')})`,
+        }),
+    },
 }));
 
 export const SubmitButton = ({ children, ...props }: any) => {

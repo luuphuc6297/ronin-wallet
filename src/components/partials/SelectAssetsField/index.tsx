@@ -1,12 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { RoninAppStoreState, useStore } from 'app/store';
 import { StackIconUrl } from 'assets';
 import { AssetListPopup } from 'components';
 import { TextFiledLabel } from 'components/base/Typography/TextFiledLabel';
 import { CloseReason } from 'components/partials/AssetListPopup';
 import { isEmpty } from 'lodash';
-import { Assets } from 'models';
 import React from 'react';
 import Select from 'react-select';
 
@@ -31,9 +29,9 @@ const customStyles = {
         height: 40,
         border: '1px solid #C5CEE0',
         borderRadius: 8,
-        margin: '0 auto',
+        marginRight: 'auto',
+        marginLeft: 'auto',
         justifyContent: 'space-between',
-        marginBottom: 16,
     }),
     indicatorsContainer: () => ({
         display: 'flex',

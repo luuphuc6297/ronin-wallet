@@ -2,11 +2,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Container, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { RoninAppStoreState, useStore } from 'app/store';
-import { AmountField, FromInputFiled, InputField, SelectAssetsField, SendAssetAppBar } from 'components';
+import {
+    AmountField, CancelButton, FromInputFiled,
+    InputField,
+    SelectAssetsField,
+    SendAssetAppBar, SendSuccessModal, SubmitButton
+} from 'components';
+
 import { OptionsProps, StyledLabelLogo } from 'components/partials/SelectAssetsField';
 import { Assets, SendAssetFormProps } from 'models';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { SendAssetSchema } from './validation';
 interface SendAssetProps {
     initialValues?: SendAssetFormProps;
@@ -25,15 +32,22 @@ const StyledContainer = styled(Container)(({ theme }) => ({
     },
 }));
 
+const StyledSubmitBtn = styled(SubmitButton)(({ theme }) => ({
+    width: 160,
+}));
+
 const SendAssetPage = ({ initialValues, onSubmit }: SendAssetProps) => {
-    const [currentOption, setCurrentOptions] = React.useState<OptionsProps[] | any>();
+    const navigate = useNavigate();
+
     const { wallet }: RoninAppStoreState | any = useStore();
+    const [open, setOpen] = React.useState<boolean>(false);
+    const [currentOption, setCurrentOptions] = React.useState<OptionsProps[] | any>();
     const [options, setOptions] = React.useState<any>();
 
     const {
         control,
         handleSubmit,
-        formState: { isSubmitting },
+        formState: { isSubmitting, isValid },
         setValue,
     } = useForm<SendAssetFormProps>({
         defaultValues: initialValues,
@@ -61,31 +75,63 @@ const SendAssetPage = ({ initialValues, onSubmit }: SendAssetProps) => {
         }
     }, [currentOption, setValue]);
 
+    const handleCancel = () => {
+        navigate('/wallet');
+    };
+
+    const handleOpenModal = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
         <Box sx={{ flexGrow: 1 }}>
             <SendAssetAppBar />
             <StyledGridContainer container>
                 <StyledContainer maxWidth="xs">
-                    <FromInputFiled control={control} name="from" />
+                    <Grid item mb={2}>
+                        <FromInputFiled control={control} name="from" />
+                    </Grid>
+                    <Grid item mb={2}>
+                        <InputField control={control} name="to" htmlFor="to" textLabel="TO" />
+                    </Grid>
 
-                    <InputField control={control} name="to" htmlFor="to" textLabel="TO" />
+                    <Grid item mb={2}>
+                        <SelectAssetsField
+                            htmlFor="assets"
+                            textLabel="ASSETS"
+                            options={options}
+                            currentOption={currentOption}
+                            setCurrentOptions={setCurrentOptions}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <AmountField
+                            control={control}
+                            name="amount"
+                            currentOption={currentOption}
+                            handleMaxAmount={handleMaxAmount}
+                        />
+                    </Grid>
 
-                    <SelectAssetsField
-                        htmlFor="assets"
-                        textLabel="ASSETS"
-                        options={options}
-                        currentOption={currentOption}
-                        setCurrentOptions={setCurrentOptions}
-                    />
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', width: 336, margin: '0 auto' }}>
+                        <CancelButton onClick={handleCancel} />
 
-                    <AmountField
-                        control={control}
-                        name="amount"
-                        currentOption={currentOption}
-                        handleMaxAmount={handleMaxAmount}
-                    />
+                        {/* <StyledSubmitBtn disabled={!isValid || isSubmitting}>
+                            {isSubmitting && <CircularProgress size={16} />}
+                            &nbsp;Send
+                        </StyledSubmitBtn> */}
+                        <StyledSubmitBtn onClick={handleOpenModal}>Send</StyledSubmitBtn>
+                    </Box>
                 </StyledContainer>
             </StyledGridContainer>
+            <SendSuccessModal
+                open={open}
+                onOpen={handleOpenModal}
+                onClose={handleClose}
+                currency={currentOption?.text}
+            />
         </Box>
     );
 };

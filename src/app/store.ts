@@ -4,6 +4,7 @@ import { Currency, User } from 'models';
 import create from 'zustand';
 import createContext from 'zustand/context';
 import { devtools, persist } from 'zustand/middleware';
+import { setToken } from 'utils';
 
 // export type StoreSlice<T extends object, E extends object = T> = (
 //     set: SetState<E extends T ? E : E & T>,
@@ -65,6 +66,7 @@ const createStore = () =>
                     getCurrentUser: async () => {
                         const result = await userApis.getCurrentUser();
                         set({ user: result });
+                        setToken();
                     },
                     getWallet: async (roninAddress: string) => {
                         const result = await userApis.getWallet(roninAddress);

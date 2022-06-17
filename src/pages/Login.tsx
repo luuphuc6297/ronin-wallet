@@ -108,7 +108,7 @@ const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
                             }}
                         />
                         <SubmitButton disabled={!isValid || isSubmitting}>
-                            {isSubmitting && <CircularProgress size={16} color="primary" />}
+                            {isSubmitting && <CircularProgress size={16} />}
                             &nbsp;Unlock
                         </SubmitButton>
                     </form>

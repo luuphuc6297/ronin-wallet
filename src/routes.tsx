@@ -15,7 +15,7 @@ const Router = () => {
                 {
                     path: '/login',
                     element: (
-                        <Suspense>
+                        <Suspense fallback={<div>Loading</div>}>
                             <LoginContainer />
                         </Suspense>
                     ),
@@ -23,7 +23,7 @@ const Router = () => {
                 {
                     path: '/wallet',
                     element: (
-                        <Suspense>
+                        <Suspense fallback={<div>Loading</div>}>
                             <WalletContainer />
                         </Suspense>
                     ),
@@ -31,7 +31,7 @@ const Router = () => {
                 {
                     path: '/send',
                     element: (
-                        <Suspense>
+                        <Suspense fallback={<div>Loading</div>}>
                             <SendAssetContainer />
                         </Suspense>
                     ),

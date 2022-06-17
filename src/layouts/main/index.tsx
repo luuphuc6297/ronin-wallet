@@ -19,8 +19,8 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     return (
         <StyledMainLayout>
             {/* <AuthProvider> */}
-                {children}
-                <Outlet />
+            {children}
+            <Outlet />
             {/* </AuthProvider> */}
         </StyledMainLayout>
     );
