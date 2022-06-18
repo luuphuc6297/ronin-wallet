@@ -1,12 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, CircularProgress } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { RoninAppStoreState, useStore } from 'app/store';
 import {
-    AmountField, CancelButton, FromInputFiled,
+    AmountField,
+    CancelButton,
+    FromInputFiled,
     InputField,
     SelectAssetsField,
-    SendAssetAppBar, SendSuccessModal, SubmitButton
+    SendAssetAppBar,
+    SendSuccessModal,
+    SubmitButton,
 } from 'components';
 
 import { OptionsProps, StyledLabelLogo } from 'components/partials/SelectAssetsField';
@@ -34,6 +38,9 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 
 const StyledSubmitBtn = styled(SubmitButton)(({ theme }) => ({
     width: 160,
+    '&:hover': {
+        backgroundColor: '#3072c9',
+    },
 }));
 
 const SendAssetPage = ({ initialValues, onSubmit }: SendAssetProps) => {
@@ -82,47 +89,59 @@ const SendAssetPage = ({ initialValues, onSubmit }: SendAssetProps) => {
     const handleOpenModal = () => {
         setOpen(true);
     };
+
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleFormSubmit = async (formValues: SendAssetFormProps) => {
+        try {
+            await onSubmit?.(formValues);
+            setOpen(true);
+        } catch (error: any) {
+            console.log('error', error);
+        }
+    };
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <SendAssetAppBar />
             <StyledGridContainer container>
                 <StyledContainer maxWidth="xs">
-                    <Grid item mb={2}>
-                        <FromInputFiled control={control} name="from" />
-                    </Grid>
-                    <Grid item mb={2}>
-                        <InputField control={control} name="to" htmlFor="to" textLabel="TO" />
-                    </Grid>
+                    <form onSubmit={handleSubmit(handleFormSubmit)}>
+                        <Grid item mb={2}>
+                            <FromInputFiled control={control} name="from" />
+                        </Grid>
+                        <Grid item mb={2}>
+                            <InputField control={control} name="to" htmlFor="to" textLabel="TO" />
+                        </Grid>
 
-                    <Grid item mb={2}>
-                        <SelectAssetsField
-                            htmlFor="assets"
-                            textLabel="ASSETS"
-                            options={options}
-                            currentOption={currentOption}
-                            setCurrentOptions={setCurrentOptions}
-                        />
-                    </Grid>
-                    <Grid item>
-                        <AmountField
-                            control={control}
-                            name="amount"
-                            currentOption={currentOption}
-                            handleMaxAmount={handleMaxAmount}
-                        />
-                    </Grid>
+                        <Grid item mb={2}>
+                            <SelectAssetsField
+                                htmlFor="assets"
+                                textLabel="ASSETS"
+                                options={options}
+                                currentOption={currentOption}
+                                setCurrentOptions={setCurrentOptions}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <AmountField
+                                control={control}
+                                name="amount"
+                                currentOption={currentOption}
+                                handleMaxAmount={handleMaxAmount}
+                            />
+                        </Grid>
+                    </form>
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: 336, margin: '0 auto' }}>
                         <CancelButton onClick={handleCancel} />
 
-                        {/* <StyledSubmitBtn disabled={!isValid || isSubmitting}>
+                        <StyledSubmitBtn onClick={handleOpenModal}>
                             {isSubmitting && <CircularProgress size={16} />}
                             &nbsp;Send
-                        </StyledSubmitBtn> */}
-                        <StyledSubmitBtn onClick={handleOpenModal}>Send</StyledSubmitBtn>
+                        </StyledSubmitBtn>
                     </Box>
                 </StyledContainer>
             </StyledGridContainer>

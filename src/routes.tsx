@@ -1,6 +1,6 @@
+import { CircularIndeterminate } from 'components';
 import React, { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-
 const LoginContainer = React.lazy(() => import('containers/auth/Login'));
 const WalletContainer = React.lazy(() => import('containers/wallet'));
 const MainLayout = React.lazy(() => import('layouts/main'));
@@ -15,7 +15,7 @@ const Router = () => {
                 {
                     path: '/login',
                     element: (
-                        <Suspense fallback={<div>Loading</div>}>
+                        <Suspense fallback={<CircularIndeterminate />}>
                             <LoginContainer />
                         </Suspense>
                     ),
@@ -23,7 +23,7 @@ const Router = () => {
                 {
                     path: '/wallet',
                     element: (
-                        <Suspense fallback={<div>Loading</div>}>
+                        <Suspense fallback={<CircularIndeterminate />}>
                             <WalletContainer />
                         </Suspense>
                     ),
@@ -31,7 +31,7 @@ const Router = () => {
                 {
                     path: '/send',
                     element: (
-                        <Suspense fallback={<div>Loading</div>}>
+                        <Suspense fallback={<CircularIndeterminate />}>
                             <SendAssetContainer />
                         </Suspense>
                     ),

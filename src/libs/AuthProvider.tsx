@@ -13,25 +13,25 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const token = getToken();
 
     // const message = useSnackbar();
-    // const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
     // const { formatMessage } = useIntl();
     const navigate = useNavigate();
 
     React.useEffect(() => {
         if (!token) navigate('/login', { replace: true });
-
+        navigate('/wallet');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
-    // const logout = React.useCallback(() => {
-    //     removeToken();
-    //     navigate('/login', { replace: true });
-    //     // message.success(formatMessage({ id: 'sign_out_successfully' }));
-    // }, [queryClient]);
+    const logout = React.useCallback(() => {
+        removeToken();
+        navigate('/login', { replace: true });
+        // message.success(formatMessage({ id: 'sign_out_successfully' }));
+    }, [queryClient]);
 
     const contextValue = React.useMemo(
         () => ({
-            // logout,
+            logout,
             isLogged: !!token,
         }),
         // eslint-disable-next-line react-hooks/exhaustive-deps

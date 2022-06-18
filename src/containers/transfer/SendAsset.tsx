@@ -13,12 +13,9 @@ const SendAssetContainer = () => {
         amount: 0,
     } as SendAssetFormProps;
 
-    React.useEffect(() => {
-        localStorage.removeItem('access_token');
-    });
-
     const handleSendAssets = async (formValues: SendAssetFormProps) => {
-        //TODO: call api to login
+        console.log('formValues___', formValues);
+        //TODO: call api to send
     };
 
     return <SendAssetPage initialValues={initialValues} onSubmit={handleSendAssets} />;

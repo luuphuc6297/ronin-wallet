@@ -1,5 +1,6 @@
 export * from './base/Button';
 export * from './base/CancelBtn';
+export * from './base/CircularIndeterminate';
 export * from './base/Input';
 export * from './base/Typography';
 export * from './partials/Account';

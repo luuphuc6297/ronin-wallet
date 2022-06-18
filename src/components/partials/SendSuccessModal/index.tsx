@@ -49,6 +49,9 @@ const StyledOkBtn = styled(Button)(({ theme }) => ({
     boxShadow: 'none',
     color: 'white',
     marginTop: 24,
+    '&:hover': {
+        backgroundColor: '#3078d9',
+    },
 }));
 
 export const SendSuccessModal = ({ open, currency, onOpen, onClose }: SendSuccessModalProps) => {
@@ -68,7 +71,7 @@ export const SendSuccessModal = ({ open, currency, onOpen, onClose }: SendSucces
                     <StyledContentModal id="modal-modal-description">
                         Thank you for using our service
                     </StyledContentModal>
-                    <StyledOkBtn>OK</StyledOkBtn>
+                    <StyledOkBtn onClick={onClose}>OK</StyledOkBtn>
                 </Box>
             </StyledWrapperModal>
         </Modal>

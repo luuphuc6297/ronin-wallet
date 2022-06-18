@@ -6,6 +6,7 @@ import { TextFiledLabel } from 'components/base/Typography/TextFiledLabel';
 import { CloseReason } from 'components/partials/AssetListPopup';
 import { isEmpty } from 'lodash';
 import React from 'react';
+// import { Controller, Control } from 'react-hook-form';
 import Select from 'react-select';
 
 export interface OptionsProps {
@@ -85,6 +86,11 @@ export const SelectAssetsField = ({
         <Box onClick={() => setOpen(!open)}>
             <TextFiledLabel htmlFor={htmlFor}>{textLabel}</TextFiledLabel>
             {!isEmpty(options) && (
+                // @ts-ignore
+                // <Controller
+                //     control={control}
+                //     render={({ field: { value, onChange, onBlur } }) => {
+                //         return (
                 <Select
                     isClearable={false}
                     theme={(theme) => ({ ...theme, borderRadius: 0 })}
@@ -109,6 +115,9 @@ export const SelectAssetsField = ({
                     openMenuOnClick={false}
                     isSearchable={false}
                 />
+                //         );
+                //     }}
+                // />
             )}
             <AssetListPopup open={open} onClose={handleClose} setCurrentOptions={setCurrentOptions} />
         </Box>
