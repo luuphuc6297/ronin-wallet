@@ -1,5 +1,5 @@
 export const getToken = () => {
-    const token = localStorage.getItem('access_token');
+    const token = window.localStorage.getItem('access_token');
     return token || null;
 };
 

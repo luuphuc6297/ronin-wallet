@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getToken, removeToken } from 'utils';
+import { isNull } from 'lodash';
 // import { useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 // import { useSnackbar } from 'hooks';
@@ -18,8 +19,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const navigate = useNavigate();
 
     React.useEffect(() => {
-        if (!token) navigate('/login', { replace: true });
-        navigate('/wallet');
+        console.log('token', token);
+        if (!token || isNull(token)) {
+            navigate('/login', { replace: true });
+        } else {
+            navigate('/wallet');
+        }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
