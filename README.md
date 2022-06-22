@@ -10,6 +10,14 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### The application already deployed on: https://ronin-wallet-eight.vercel.app/
+
+# You can log in with any password, as long as you meet the validation condition.
+## The application uses the default user and you can find the user on: 
+https://ronin-server.herokuapp.com/api/users/fad3a9ac-3d0b-48cd-8bbb-a5859111112c
+
+### For example: `Lu!6297pu`
 # Library already in use
 ## REST APIs
 `json-server`
@@ -30,7 +38,7 @@ Note: the API KEY is just free for 7 days, so if the app can not working
 maybe it's because the first Forex api key to expired.
 
 ## Layout library
-Material UI version 5
+`Material UI version 5`
 
 ## Handle form and validation
 `react-hook-form and yup`
